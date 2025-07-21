@@ -1,15 +1,15 @@
 // src/pages/Landing.tsx
 
 import React, { useState, useEffect } from 'react';
-import { Database, Zap, Code, Globe, Users, Star, User } from 'lucide-react';
+import { Calendar, Shield, Heart, Award, Clock, Phone, MapPin, Mail, User, Stethoscope } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Container, Button, Card, CardContent, Badge, Header, Nav, Section, Span, H1, H2, P, Div, Footer } from '../lib/dev-container';
 import { useAuth } from '../components/auth/AuthProvider';
 import type { ComponentRegistryId } from '../registry/componentRegistry';
 
 // Helper functions to ensure type safety for dynamic IDs
-const getStatCardId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['stat-card-0', 'stat-card-1', 'stat-card-2', 'stat-card-3'];
+const getServiceCardId = (index: number): ComponentRegistryId => {
+  const ids: ComponentRegistryId[] = ['service-card-0', 'service-card-1', 'service-card-2', 'service-card-3'];
   return ids[index] || 'noID';
 };
 
@@ -18,13 +18,8 @@ const getFeatureCardId = (index: number): ComponentRegistryId => {
   return ids[index] || 'noID';
 };
 
-const getTechLetterId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['tech-letter-0', 'tech-letter-1', 'tech-letter-2', 'tech-letter-3', 'tech-letter-4', 'tech-letter-5'];
-  return ids[index] || 'noID';
-};
-
-const getTechBadgeId = (index: number): ComponentRegistryId => {
-  const ids: ComponentRegistryId[] = ['tech-badge-0', 'tech-badge-1', 'tech-badge-2', 'tech-badge-3', 'tech-badge-4', 'tech-badge-5'];
+const getStatCardId = (index: number): ComponentRegistryId => {
+  const ids: ComponentRegistryId[] = ['stat-card-0', 'stat-card-1', 'stat-card-2', 'stat-card-3'];
   return ids[index] || 'noID';
 };
 
@@ -36,102 +31,137 @@ export const Landing: React.FC = () => {
     setMounted(true);
   }, []);
 
+  const services = [
+    {
+      icon: <Heart className="w-8 h-8 text-blue-500" />,
+      title: "General Dentistry",
+      description: "Comprehensive dental care including cleanings, fillings, and preventive treatments"
+    },
+    {
+      icon: <Shield className="w-8 h-8 text-teal-500" />,
+      title: "Preventive Care",
+      description: "Regular checkups and cleanings to maintain optimal oral health"
+    },
+    {
+      icon: <Award className="w-8 h-8 text-blue-600" />,
+      title: "Cosmetic Dentistry",
+      description: "Teeth whitening, veneers, and smile makeovers for a confident smile"
+    },
+    {
+      icon: <Stethoscope className="w-8 h-8 text-teal-600" />,
+      title: "Restorative Care",
+      description: "Crowns, bridges, and implants to restore function and appearance"
+    }
+  ];
+
   const features = [
     {
-      icon: <Zap className="w-8 h-8 text-yellow-500" />,
-      title: "Lightning Fast",
-      description: "Built with Vite for instant hot module replacement and blazing fast builds"
+      icon: <Calendar className="w-8 h-8 text-blue-500" />,
+      title: "Easy Scheduling",
+      description: "Book appointments online or call our friendly staff"
     },
     {
-      icon: <Database className="w-8 h-8 text-green-500" />,
-      title: "MongoDB + Prisma",
-      description: "Type-safe database access with MongoDB flexibility and Prisma's developer experience"
+      icon: <Clock className="w-8 h-8 text-teal-500" />,
+      title: "Flexible Hours",
+      description: "Evening and weekend appointments available"
     },
     {
-      icon: <Code className="w-8 h-8 text-blue-500" />,
-      title: "TypeScript Ready",
-      description: "Full TypeScript support with strict type checking and IntelliSense"
+      icon: <Shield className="w-8 h-8 text-blue-600" />,
+      title: "Insurance Accepted",
+      description: "We work with most major insurance providers"
     },
     {
-      icon: <Globe className="w-8 h-8 text-purple-500" />,
-      title: "Deploy Anywhere",
-      description: "Ready for Netlify, Vercel, or any modern hosting platform"
+      icon: <Heart className="w-8 h-8 text-teal-600" />,
+      title: "Gentle Care",
+      description: "Comfortable, pain-free treatments in a relaxing environment"
     }
   ];
 
   const stats = [
-    { label: "Build Time", value: "< 2s" },
-    { label: "Bundle Size", value: "< 50KB" },
-    { label: "TypeScript", value: "100%" },
-    { label: "Performance", value: "A+" }
+    { label: "Years Experience", value: "25+" },
+    { label: "Happy Patients", value: "5000+" },
+    { label: "Procedures", value: "15000+" },
+    { label: "Success Rate", value: "99%" }
   ];
 
   return (
-    <Container componentId="landing-page-root"> {/* Changed to direct ID */}
+    <Container componentId="landing-page-root">
       <Div 
         devId="main-wrapper" 
         devName="Main Wrapper" 
-        devDescription="Main page wrapper with gradient background"
-        className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900"
+        devDescription="Main page wrapper with healthcare gradient background"
+        className="min-h-screen bg-gradient-to-br from-blue-50 via-teal-50 to-blue-100"
       >
       {/* Header */}
       <Header 
         devId="main-header" 
         devName="Main Header" 
-        devDescription="Primary site header with navigation"
+        devDescription="Primary dental practice header with navigation"
         className="container mx-auto px-4 py-6"
       >
         <Nav 
           devId="main-nav" 
           devName="Main Navigation" 
-          devDescription="Primary navigation bar"
+          devDescription="Primary navigation bar for dental practice"
           className="flex items-center justify-between"
         >
           <Div 
             devId="logo-section" 
             devName="Logo Section" 
-            devDescription="Company logo and brand name"
+            devDescription="Dr. Miller dental practice logo and brand name"
             className="flex items-center space-x-2"
           >
-            <Div devId="noID" className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-              <Code className="w-5 h-5 text-white" />
+            <Div devId="noID" className="w-10 h-10 bg-gradient-to-r from-blue-600 to-teal-600 rounded-full flex items-center justify-center">
+              <Heart className="w-6 h-6 text-white" />
             </Div>
-            <Span 
-              devId="brand-name" 
-              devName="Brand Name" 
-              devDescription="Geenius Template brand name"
-              className="text-xl font-bold text-white"
-            >
-              Geenius Template
-            </Span>
+            <Div devId="noID" className="flex flex-col">
+              <Span 
+                devId="brand-name" 
+                devName="Brand Name" 
+                devDescription="Dr. Miller Dental Practice brand name"
+                className="text-xl font-bold text-gray-800"
+              >
+                Dr. Miller Dental
+              </Span>
+              <Span devId="noID" className="text-sm text-gray-600">Family Dentistry</Span>
+            </Div>
           </Div>
           <Div 
             devId="nav-actions" 
             devName="Navigation Actions" 
-            devDescription="Navigation buttons and user menu"
+            devDescription="Navigation buttons and user menu for dental practice"
             className="flex items-center space-x-4"
           >
             <Button 
-              devId="docs-button" 
-              devName="Docs Button" 
-              devDescription="Link to documentation"
+              devId="services-button" 
+              devName="Services Button" 
+              devDescription="Link to dental services"
               variant="ghost" 
-              className="text-gray-300 hover:text-white transition-colors"
+              className="text-gray-700 hover:text-blue-600 transition-colors"
             >
-              Docs
+              Services
+            </Button>
+            <Button 
+              devId="about-button" 
+              devName="About Button" 
+              devDescription="Link to about Dr. Miller"
+              variant="ghost" 
+              className="text-gray-700 hover:text-blue-600 transition-colors"
+            >
+              About
             </Button>
             {isAuthenticated ? (
               <Div 
                 devId="user-section" 
                 devName="User Section" 
-                devDescription="Authenticated user welcome area"
+                devDescription="Authenticated user welcome area for dental practice"
                 className="flex items-center space-x-4"
               >
                 <Span 
                   devId="welcome-message" 
                   devName="Welcome Message" 
-                  devDescription="Welcome message for authenticated user"
-                  className="text-gray-300"
+                  devDescription="Welcome message for authenticated dental practice user"
+                  className="text-gray-700"
                 >
                   Welcome, {user?.name?.split(' ')[0]}!
                 </Span>
@@ -139,8 +169,8 @@ export const Landing: React.FC = () => {
                   <Button 
                     devId="nav-dashboard-button"
                     devName="Navigation Dashboard Button"
-                    devDescription="Dashboard button in navigation header for authenticated users"
-                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
+                    devDescription="Dashboard button for dental practice management"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
                   >
                     <User className="w-4 h-4 mr-2" />
                     Dashboard
@@ -151,28 +181,28 @@ export const Landing: React.FC = () => {
               <Div 
                 devId="auth-buttons" 
                 devName="Authentication Buttons" 
-                devDescription="Login and register buttons for unauthenticated users"
+                devDescription="Login and register buttons for dental practice"
                 className="flex items-center space-x-2"
               >
                 <Link to="/login">
                   <Button 
                     devId="nav-login-button"
                     devName="Navigation Login Button"
-                    devDescription="Login button in navigation header"
+                    devDescription="Login button for dental practice staff"
                     variant="ghost" 
-                    className="text-gray-300 hover:text-white transition-colors"
+                    className="text-gray-700 hover:text-blue-600 transition-colors"
                   >
-                    Login
+                    Staff Login
                   </Button>
                 </Link>
                 <Link to="/register">
                   <Button 
                     devId="nav-register-button"
                     devName="Navigation Register Button"
-                    devDescription="Get started button in navigation header"
-                    className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
+                    devDescription="Book appointment button in navigation"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
                   >
-                    Get Started
+                    Book Appointment
                   </Button>
                 </Link>
               </Div>
@@ -182,81 +212,82 @@ export const Landing: React.FC = () => {
       </Header>
 
       {/* Hero Section */}
-      <Container componentId="hero-section"> {/* Changed to direct ID */}
+      <Container componentId="hero-section">
         <Section 
           devId="hero-content" 
           devName="Hero Content" 
-          devDescription="Main hero Section with title and call-to-action"
+          devDescription="Main hero section for Dr. Miller dental practice"
           className="container mx-auto px-4 py-20 text-center"
         >
           <Div 
             devId="hero-content-wrapper" 
             devName="Hero Content Wrapper" 
-            devDescription="Animated wrapper for hero content"
+            devDescription="Animated wrapper for dental practice hero content"
             className={`transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
             <H1 
               devId="hero-title" 
               devName="Hero Title" 
-              devDescription="Main hero title showcasing the tech stack"
-              className="text-5xl md:text-7xl font-bold text-white mb-6"
+              devDescription="Main hero title for Dr. Miller dental practice"
+              className="text-5xl md:text-7xl font-bold text-gray-800 mb-6"
             >
-              Vite + React + 
+              Your Smile is Our 
               <Span 
-                devId="mongodb-highlight" 
-                devName="MongoDB Highlight" 
-                devDescription="Highlighted MongoDB text in gradient"
-                className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+                devId="priority-highlight" 
+                devName="Priority Highlight" 
+                devDescription="Highlighted priority text in dental gradient"
+                className="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent"
               >
-                {' '}MongoDB
+                {' '}Priority
               </Span>
             </H1>
             <P 
               devId="hero-description" 
               devName="Hero Description" 
-              devDescription="Hero Section description explaining the template benefits"
-              className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+              devDescription="Hero section description for dental practice services"
+              className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto"
             >
-              Modern full-stack template with lightning-fast development, type-safe database access, 
-              and production-ready deployment configuration.
+              Dr. Miller provides comprehensive dental care with over 25 years of experience. 
+              From routine cleanings to advanced procedures, we're here for your family's oral health.
             </P>
             <Div 
               devId="hero-cta-buttons" 
               devName="Hero CTA Buttons" 
-              devDescription="Call-to-action buttons in hero Section"
+              devDescription="Call-to-action buttons for dental practice"
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               {isAuthenticated ? (
                 <Link to="/dashboard">
                   <Button 
-                    devId="hero-start-building"
-                    devName="Start Building Button"
-                    devDescription="Primary call-to-action button for starting to build with the template"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+                    devId="hero-manage-practice"
+                    devName="Manage Practice Button"
+                    devDescription="Primary button to access practice management dashboard"
+                    className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
                   >
-                    Go to Dashboard
+                    Manage Practice
                   </Button>
                 </Link>
               ) : (
                 <Link to="/register">
                   <Button 
-                    devId="hero-start-building"
-                    devName="Start Building Button"
-                    devDescription="Primary call-to-action button for starting to build with the template"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+                    devId="hero-book-appointment"
+                    devName="Book Appointment Button"
+                    devDescription="Primary call-to-action button for booking dental appointments"
+                    className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
                   >
-                    Start Building
+                    Book Appointment
                   </Button>
                 </Link>
               )}
               <Button 
-                devId="hero-github-button"
-                devName="View on GitHub Button"
-                devDescription="Secondary button to view the project on GitHub"
+                devId="hero-call-button"
+                devName="Call Now Button"
+                devDescription="Secondary button to call the dental office"
                 variant="outline"
-                className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all"
+                className="border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all"
               >
-                View on GitHub
+                <Phone className="w-4 h-4 mr-2" />
+                Call (555) 123-4567
               </Button>
             </Div>
           </Div>
@@ -264,17 +295,17 @@ export const Landing: React.FC = () => {
       </Container>
 
       {/* Stats Section */}
-      <Container componentId="stats-section"> {/* Changed to direct ID */}
+      <Container componentId="stats-section">
         <Section 
           devId="stats-content" 
           devName="Stats Content" 
-          devDescription="Statistics Section showing performance metrics"
+          devDescription="Statistics section showing dental practice achievements"
           className="container mx-auto px-4 py-12"
         >
           <Div 
             devId="stats-grid" 
             devName="Stats Grid" 
-            devDescription="Grid container for statistics cards"
+            devDescription="Grid container for dental practice statistics"
             className="grid grid-cols-2 md:grid-cols-4 gap-6"
           >
             {stats.map((stat, index) => (
@@ -283,11 +314,40 @@ export const Landing: React.FC = () => {
                 devId={getStatCardId(index)}
                 devName={`${stat.label} Stat Card`}
                 devDescription={`Statistical card showing ${stat.label}: ${stat.value}`}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 text-center border border-white/10"
+                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center border border-blue-100 shadow-lg"
               >
-                <CardContent devId="noID"  className="p-0">
-                  <Div devId="noID" className="text-2xl font-bold text-white mb-2">{stat.value}</Div>
-                  <Div devId="noID" className="text-gray-400">{stat.label}</Div>
+                <CardContent devId="noID" className="p-0">
+                  <Div devId="noID" className="text-2xl font-bold text-blue-600 mb-2">{stat.value}</Div>
+                  <Div devId="noID" className="text-gray-600">{stat.label}</Div>
+                </CardContent>
+              </Card>
+            ))}
+          </Div>
+        </Section>
+      </Container>
+
+      {/* Services Section */}
+      <Container componentId="services-section">
+        <Section devId="noID" className="container mx-auto px-4 py-20">
+          <Div devId="noID" className="text-center mb-16">
+            <H2 devId="noID" className="text-4xl font-bold text-gray-800 mb-4">Our Dental Services</H2>
+            <P devId="noID" className="text-gray-600 max-w-2xl mx-auto">
+              Comprehensive dental care for the whole family with state-of-the-art technology and gentle techniques
+            </P>
+          </Div>
+          <Div devId="noID" className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => (
+              <Card 
+                key={index} 
+                devId={getServiceCardId(index)}
+                devName={`${service.title} Service Card`}
+                devDescription={`Service card for ${service.title}: ${service.description}`}
+                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-blue-100 hover:border-blue-300 transition-all shadow-lg hover:shadow-xl"
+              >
+                <CardContent devId="noID" className="p-0">
+                  <Div devId="noID" className="mb-4">{service.icon}</Div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{service.title}</h3>
+                  <P devId="noID" className="text-gray-600">{service.description}</P>
                 </CardContent>
               </Card>
             ))}
@@ -296,12 +356,12 @@ export const Landing: React.FC = () => {
       </Container>
 
       {/* Features Section */}
-      <Container componentId="features-section"> {/* Changed to direct ID */}
-        <Section devId="noID" className="container mx-auto px-4 py-20">
+      <Container componentId="features-section">
+        <Section devId="noID" className="container mx-auto px-4 py-20 bg-white/50 rounded-3xl mx-4">
           <Div devId="noID" className="text-center mb-16">
-            <H2 devId="noID" className="text-4xl font-bold text-white mb-4">Why Choose This Template?</H2>
-            <P devId="noID" className="text-gray-300 max-w-2xl mx-auto">
-              Everything you need to build modern web applications with the latest technologies
+            <H2 devId="noID" className="text-4xl font-bold text-gray-800 mb-4">Why Choose Dr. Miller?</H2>
+            <P devId="noID" className="text-gray-600 max-w-2xl mx-auto">
+              Experience the difference of personalized, gentle dental care in a comfortable environment
             </P>
           </Div>
           <Div devId="noID" className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -311,12 +371,12 @@ export const Landing: React.FC = () => {
                 devId={getFeatureCardId(index)}
                 devName={`${feature.title} Feature Card`}
                 devDescription={`Feature card highlighting ${feature.title}: ${feature.description}`}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-purple-500/50 transition-all"
+                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-blue-100 hover:border-teal-300 transition-all shadow-lg"
               >
                 <CardContent devId="noID" className="p-0">
                   <Div devId="noID" className="mb-4">{feature.icon}</Div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                  <P devId="noID" className="text-gray-400">{feature.description}</P>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{feature.title}</h3>
+                  <P devId="noID" className="text-gray-600">{feature.description}</P>
                 </CardContent>
               </Card>
             ))}
@@ -324,73 +384,47 @@ export const Landing: React.FC = () => {
         </Section>
       </Container>
 
-      {/* Tech Stack Section */}
-      <Container componentId="tech-stack-section"> {/* Changed to direct ID */}
+      {/* Contact Section */}
+      <Container componentId="contact-section">
         <Section devId="noID" className="container mx-auto px-4 py-20">
-          <Div devId="noID" className="text-center mb-16">
-            <H2 devId="noID" className="text-4xl font-bold text-white mb-4">Modern Tech Stack</H2>
-            <P devId="noID" className="text-gray-300 max-w-2xl mx-auto">
-              Built with the most popular and reliable technologies
+          <Div devId="noID" className="bg-gradient-to-r from-blue-600/10 to-teal-600/10 rounded-2xl p-12 text-center border border-blue-200">
+            <H2 devId="noID" className="text-4xl font-bold text-gray-800 mb-4">Ready to Schedule Your Visit?</H2>
+            <P devId="noID" className="text-gray-600 mb-8 max-w-2xl mx-auto">
+              Contact us today to book your appointment or learn more about our dental services
             </P>
-          </Div>
-          <Div devId="noID" className="grid grid-cols-2 md:grid-cols-6 gap-8">
-            {[
-              { name: "Vite", color: "from-yellow-400 to-orange-500" },
-              { name: "React", color: "from-blue-400 to-cyan-400" },
-              { name: "TypeScript", color: "from-blue-500 to-blue-600" },
-              { name: "MongoDB", color: "from-green-400 to-green-500" },
-              { name: "Prisma", color: "from-purple-400 to-purple-500" },
-              { name: "Tailwind", color: "from-teal-400 to-teal-500" }
-            ].map((tech, index) => (
-              <Div key={index} devId="noID" className="text-center">
-                <Div devId={getTechLetterId(index)} className={`w-16 h-16 mx-auto mb-3 rounded-xl bg-gradient-to-br ${tech.color} flex items-center justify-center`}>
-                  <span className="text-white font-bold text-lg">{tech.name[0]}</span>
-                </Div>
-                <Badge 
-                  devId={getTechBadgeId(index)}
-                  devName={`${tech.name} Technology Badge`}
-                  devDescription={`Technology badge for ${tech.name}`}
-                  className="text-gray-300 font-medium bg-transparent border-none"
-                >
-                  {tech.name}
-                </Badge>
+            <Div devId="noID" className="grid md:grid-cols-3 gap-6 mb-8">
+              <Div devId="noID" className="flex items-center justify-center space-x-3">
+                <Phone className="w-5 h-5 text-blue-600" />
+                <Span devId="noID" className="text-gray-700">(555) 123-4567</Span>
               </Div>
-            ))}
-          </Div>
-        </Section>
-      </Container>
-
-      {/* CTA Section */}
-      <Container componentId="cta-section"> {/* Changed to direct ID */}
-        <Section devId="noID" className="container mx-auto px-4 py-20">
-          <Div devId="noID" className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-2xl p-12 text-center border border-purple-500/30">
-            <H2 devId="noID" className="text-4xl font-bold text-white mb-4">Ready to Build Something Amazing?</H2>
-            <P devId="noID" className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Get started with this template and build your next project with confidence
-            </P>
+              <Div devId="noID" className="flex items-center justify-center space-x-3">
+                <Mail className="w-5 h-5 text-blue-600" />
+                <Span devId="noID" className="text-gray-700">info@drmillerdental.com</Span>
+              </Div>
+              <Div devId="noID" className="flex items-center justify-center space-x-3">
+                <MapPin className="w-5 h-5 text-blue-600" />
+                <Span devId="noID" className="text-gray-700">123 Main St, City, ST</Span>
+              </Div>
+            </Div>
             <Div devId="noID" className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
-                devId="cta-start-project"
-                devName="Start Project Button"
-                devDescription="Primary CTA button to start a new project"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+                devId="contact-book-appointment"
+                devName="Contact Book Appointment"
+                devDescription="Primary CTA button to book dental appointment"
+                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
               >
-                <span className="flex items-center gap-2">
-                  <Star className="w-5 h-5" />
-                  Start Project
-                </span>
+                <Calendar className="w-5 h-5 mr-2" />
+                Book Appointment
               </Button>
               <Button 
-                devId="cta-join-community"
-                devName="Join Community Button"
-                devDescription="Secondary CTA button to join the community"
+                devId="contact-call-office"
+                devName="Call Office Button"
+                devDescription="Secondary CTA button to call dental office"
                 variant="outline"
-                className="border border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all"
+                className="border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all"
               >
-                <span className="flex items-center gap-2">
-                  <Users className="w-5 h-5" />
-                  Join Community
-                </span>
+                <Phone className="w-5 h-5 mr-2" />
+                Call Office
               </Button>
             </Div>
           </Div>
@@ -401,17 +435,17 @@ export const Landing: React.FC = () => {
       <Footer 
         devId="main-footer" 
         devName="Main Footer" 
-        devDescription="Site footer with links and copyright"
-        className="container mx-auto px-4 py-8 border-t border-white/10"
+        devDescription="Dental practice footer with contact info and links"
+        className="container mx-auto px-4 py-8 border-t border-blue-200"
       >
         <Div devId="noID" className="flex flex-col md:flex-row justify-between items-center">
-          <Div devId="noID" className="text-gray-400 mb-4 md:mb-0">
-            © 2024 Geenius Template. Built with ❤️ for developers.
+          <Div devId="noID" className="text-gray-600 mb-4 md:mb-0">
+            © 2024 Dr. Miller Dental Practice. Caring for smiles with excellence.
           </Div>
           <Div devId="noID" className="flex space-x-6">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">Documentation</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors">Support</a>
+            <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">Privacy Policy</a>
+            <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">Terms of Service</a>
+            <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
           </Div>
         </Div>
       </Footer>
